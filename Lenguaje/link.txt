@@ -1,0 +1,12 @@
+## 1
+Link encontrado donde se presento la idea de usar BACI en netbeans
+
+http://www.bo-yang.net/2014/01/22/baci-simple-install-and-compile-guide
+## 2
+Link sacado del primero donde se encuentra el archivo a descargar
+
+https://www.cslab.pepperdine.edu/warford/cosc450/cosc-450-Setup-for-BACI.pdf
+## 3
+Link sacado del segundo, presenta un rapido resumen de la documentacion
+
+http://inside.mines.edu/~tcamp/baci/baci_index.html
