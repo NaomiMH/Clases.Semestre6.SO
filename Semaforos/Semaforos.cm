@@ -1,0 +1,97 @@
+// File: ${name}
+// Author: ${user}
+// Date: ${date}
+semaphore semN;
+semaphore semS;
+binarysem puente;
+binarysem excluyeN;
+binarysem excluyeS;
+int carS;
+int carN;
+int cont;
+
+void North()
+{
+p(semN);
+p(excluyeN);
+if(carN==0){p(puente);cout<<"Hacia el norte"<<endl;}
+carN++;
+v(excluyeN);
+
+cout<<"<sc>N"<<endl;
+
+p(excluyeN);
+v(semN);
+carN--;
+if(carN==0){v(puente);cout<<"Libera el puente"<<endl;}
+v(excluyeN);
+}
+
+void South()
+{
+p(semS);
+p(excluyeS);
+if(carS==0){p(puente);cout<<"Hacia el sur"<<endl;}
+carS++;
+v(excluyeS);
+
+cout<<"<sc>S"<<endl;
+
+p(excluyeS);
+v(semS);
+carS--;
+if(carS==0){v(puente);cout<<"Libera el puente"<<endl;}
+v(excluyeS);
+}
+
+void main() {
+initialsem(puente,1);
+initialsem(excluyeN,1);
+initialsem(excluyeS,1);
+initialsem(semN,10);
+initialsem(semS,10);
+carS=carN=0;
+//it doesnt let to have more than 19 process at the same time, so in groups of 18 process
+cobegin{
+    for(cont=0;cont<9;cont++){
+    North();
+    South();
+    }
+}
+//18
+cobegin{
+    for(cont=0;cont<9;cont++){
+    North();
+    South();
+    }
+}
+//36
+cobegin{
+    for(cont=0;cont<9;cont++){
+    North();
+    South();
+    }
+}
+//54
+cobegin{
+    for(cont=0;cont<9;cont++){
+    North();
+    South();
+    }
+}
+//72
+cobegin{
+    for(cont=0;cont<9;cont++){
+    North();
+    South();
+    }
+}
+//90
+cobegin{
+    for(cont=0;cont<5;cont++){
+    North();
+    South();
+    }
+}
+//100
+}
