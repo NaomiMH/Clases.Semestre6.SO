@@ -1,0 +1,75 @@
+// Author: Naomi Macias Honti
+// Date: 25 Marzo 2018
+
+condition avanzar;
+int carros;
+
+monitor Transbordador{
+
+void cruzar(){
+carros++;
+if(carros==5){
+    cout<<"Parte de ida el Transbordador"<<endl;
+    carros--;
+    signalc(avanzar);
+}
+else{
+    waitc(avanzar);
+    carros--;
+    if(carros==0){cout<<"Parte de regreso el Transbordador"<<endl;}
+    else{signalc(avanzar);}
+}
+
+cout<<"<sc>"<<endl;
+}
+
+init{carros=0;}
+}
+
+void main() {
+int cont;
+//it doesnt let to have more than 19 process at the same time, so in groups of 15 process
+//and the Transbordador would carry 5 cars.
+cobegin{
+    for(cont=0;cont<15;cont++){
+    cruzar();
+    }
+}
+//15
+cobegin{
+    for(cont=0;cont<15;cont++){
+    cruzar();
+    }
+}
+//30
+cobegin{
+    for(cont=0;cont<15;cont++){
+    cruzar();
+    }
+}
+//45
+cobegin{
+    for(cont=0;cont<15;cont++){
+    cruzar();
+    }
+}
+//60
+cobegin{
+    for(cont=0;cont<15;cont++){
+    cruzar();
+    }
+}
+//75
+cobegin{
+    for(cont=0;cont<15;cont++){
+    cruzar();
+    }
+}
+//90
+cobegin{
+    for(cont=0;cont<10;cont++){
+    cruzar();
+    }
+}
+//100
+}
