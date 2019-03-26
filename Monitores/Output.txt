@@ -1,0 +1,147 @@
+ant -f C:\\Users\\NamiDW\\AppData\\Local\\Temp\\ant-build3918427016178125886xml build
+build:
+Compilation listing is stored in D:/Java/Monitor/Monitor.lst
+Pcode and tables are stored in D:/Java/Monitor/Monitor.pco
+Source File:  D:/Java/Monitor/Monitor.cm  lun mar 25 20:38:44 2019
+Executing PCODE ...
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+Parte de ida el Transbordador
+Parte de regreso el Transbordador
+<sc>
+<sc>
+<sc>
+<sc>
+<sc>
+BUILD SUCCESSFUL (total time: 0 seconds)
