@@ -1,6 +1,6 @@
-// File: ${name}
-// Author: ${user}
-// Date: ${date}
+// Author: Naomi Macias Honti
+// Date: 24 Marzo 2019
+
 semaphore semN;
 semaphore semS;
 binarysem puente;
