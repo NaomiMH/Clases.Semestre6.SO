@@ -1,0 +1,143 @@
+ant -f C:\\Users\\NamiDW\\AppData\\Local\\Temp\\ant-build8093450521590847787xml build
+build:
+Compilation listing is stored in D:/Java/Semaforos/Semaforos.lst
+Pcode and tables are stored in D:/Java/Semaforos/Semaforos.pco
+Source File:  D:/Java/Semaforos/Semaforos.cm  lun mar 25 14:52:13 2019
+Executing PCODE ...
+Hacia el sur
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+Libera el puente
+Hacia el norte
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+Libera el puente
+Hacia el sur
+<sc>S
+Libera el puente
+Hacia el sur
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+Libera el puente
+Hacia el norte
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+Libera el puente
+Hacia el sur
+<sc>S
+Libera el puente
+Hacia el norte
+<sc>N
+<sc>N
+Libera el puente
+Hacia el sur
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+Libera el puente
+Hacia el norte
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+Libera el puente
+Hacia el sur
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+Libera el puente
+Hacia el norte
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+Libera el puente
+Hacia el sur
+<sc>S
+Libera el puente
+Hacia el sur
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+Libera el puente
+Hacia el norte
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+Libera el puente
+Hacia el norte
+<sc>N
+<sc>N
+<sc>N
+Libera el puente
+Hacia el norte
+<sc>N
+<sc>N
+<sc>N
+<sc>N
+Libera el puente
+Hacia el sur
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+<sc>S
+Libera el puente
+Hacia el norte
+<sc>N
+Libera el puente
+BUILD SUCCESSFUL (total time: 0 seconds)
