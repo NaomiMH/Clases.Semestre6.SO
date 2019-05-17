@@ -41,3 +41,10 @@ Falta:
 
 Comprobar que los valores de las variables sean correctas y que se inicialicen las variables necesarias antes de que lleguen
 los otros comandos.
+
+## Version 1.2
+
+
+Floor, ceil. Funcion para salir. Limites para valor de variables. Reconocimiento de errores. Inicializacion invalida de variables. Se comprueban dependencias de variables. Control de los marcos disponible. Matriz de Procesos.
+
+Matriz de Memoria Real. Numpy.
