@@ -45,9 +45,21 @@ los otros comandos.
 ## Version 1.2
 Comprobacion de variables
 
-Implementacion de las funciones floor y ceil para resolver los redondeos. Funcion especifica para salir, se cambian las llamadas de salida por la llamada a la funcion de salida. Se establecen variables para controlar los limites para los posibles valores de las variables recibidas. Reconocimiento de errores, aviso de tipo de error y sale del programa. Inicializacion invalida de variables. Se comprueban dependencias de variables. Control de los marcos disponible. Matriz de Procesos.
-
-Matriz de Memoria Real. Numpy.
+Implementacion de las funciones floor y ceil para resolver los redondeos.
+Funcion especifica para salir, se cambian las llamadas de salida por la llamada a la funcion de salida.
+Se establecen variables para controlar los limites para los posibles valores de las variables recibidas.
+Reconocimiento de errores, aviso de tipo de error y sale del programa.
+Las variables son inicializadas con valores invalidos, por lo que si no se inicializan, daran error.
+Se comprueban dependencias de variables, antes de inicializar la estrategia de reemplazo, se debio de inicializar la memoria real, swap y pagesize, antes de crear cualquier proceso, se debio inicializar la estrategia.
+Se creo una variable del tamano equivalente de la memoria real mas la memoria swap en marcos, se utiliza para llevar control de la cantidad de marcos totales disponibles.
+Se crea una matriz de procesos donde el proceso n se guarda en la posicion n, contienendo su tiempo de llegada, salida, su tamano en byte y sus marcos.
+Implementacion de Numpy para crear la matrices.
 
 Problema a resolver:
 Cuando sale del servidor por un error de las variables recibidas, el cliente no se cierra correctamente.
+A la hora de recibir el commando F, para terminar el programa, se tiene que verificar que todos los procesos hayan sido liberados correctamente.
+
+## Version 2
+Creacion de memoria
+
+Matriz de Memoria Real.
