@@ -43,8 +43,11 @@ Comprobar que los valores de las variables sean correctas y que se inicialicen l
 los otros comandos.
 
 ## Version 1.2
+Comprobacion de variables
 
-
-Floor, ceil. Funcion para salir. Limites para valor de variables. Reconocimiento de errores. Inicializacion invalida de variables. Se comprueban dependencias de variables. Control de los marcos disponible. Matriz de Procesos.
+Implementacion de las funciones floor y ceil para resolver los redondeos. Funcion especifica para salir, se cambian las llamadas de salida por la llamada a la funcion de salida. Se establecen variables para controlar los limites para los posibles valores de las variables recibidas. Reconocimiento de errores, aviso de tipo de error y sale del programa. Inicializacion invalida de variables. Se comprueban dependencias de variables. Control de los marcos disponible. Matriz de Procesos.
 
 Matriz de Memoria Real. Numpy.
+
+Problema a resolver:
+Cuando sale del servidor por un error de las variables recibidas, el cliente no se cierra correctamente.
