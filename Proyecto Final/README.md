@@ -62,4 +62,4 @@ A la hora de recibir el commando F, para terminar el programa, se tiene que veri
 ## Version 2
 Creacion de memoria
 
-Matriz de Memoria Real.
+Se inicializa la memoria real y la memoria swap segun su tamano correspondiente en marcos
