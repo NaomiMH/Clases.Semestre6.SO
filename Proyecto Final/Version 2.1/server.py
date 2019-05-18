@@ -25,8 +25,17 @@ from math import ceil
 # acceso a datos
 # matr[reng,col]
 
+# ceil
+# para redondeo hacia arriba
+# val = ceil(num)
 
-# Inicializacion
+# floor
+# para redondeo hacia abajo
+# val = floor(num)
+
+# *********************************
+# Inicializacion (variables)
+# *********************************
 
 # Variables en valores negativos
 # El programa no correra si los valores no son cambiados a valores aceptables
@@ -35,9 +44,12 @@ SwapMemory = -1
 PageSize = -1
 PoliticaMemory = 'XXX'
 # Memoria total disponible
+# M_DIS = ceil(RealMemory+SwapMemory/PageSize)
+# unidades en marcos
 M_DIS = 0
 
 # Variables limites
+# Estos limites pueden ser cambiados
 RM_MAX = 10
 RM_MIN = 0
 SM_MAX = 10
@@ -46,11 +58,16 @@ PS_MAX = 10000
 PS_MIN = 0
 
 # Variable Arreglo de Procesos
+# guarda un arreglo donde en la posicion n se encuentra la informacion del proceso n, por lo que no necesita un renglon para representar el numero del proceso
+# Para saber si un proceso n existe, se verifica que en la posicion n no haya valor negativo (en este caso se checaria el tiempo de entrada, si el proceso existe solo hay que ponerle tiempo de entrada, por supuesto que sera un valor positivo y cuando se libera al proceso, solo hay que multiplicar el valor por -1 para volverlo invalido)
 # [Timestamp entrada, Timestamp salida, # de Marcos totales, # de Tamano del proceso]
 Proc=np.full((10,4),-1)
 
+# ****************
 # Funciones
+# ***************
 
+# *****************
 # Inicializar la memoria Swap y Real
 # Parametro: Tamano de la memoria real y Tamano de la memoria swap
 def iniciarMemoria(tamanoR,tamanoS):
@@ -58,6 +75,7 @@ def iniciarMemoria(tamanoR,tamanoS):
 	# [# identificador, Timestamp entrada a RM, Contador usos]
 	RM = np.full((tamanoR,3),-1)
 	SM = np.full((tamanoS,3),-1)
+# *******************
 
 # Desconexion y salida
 def salir():
@@ -65,20 +83,42 @@ def salir():
 	connection.close()
 	sys.exit()
 
+# ************************************
+# ************************************
+# LAS FUNCIONES QUE FALTAN POR HACER
+# ************************************
+# ************************************
+# Tambien se necesita que alguien encuentre como hacer lo de timestamp,
+# y manejar todo lo de los procesos (que se suponen que tardan y algo asi)
+
 # Algoritmos de reemplazo
 # Return: Marco de pagina de la memoria real
 def aLRU():
 	print >>sys.stderr, 'Function LRU INCOMPLETA'
 	return 0;
+	# Buscara en la memoria real cual es el marco que es el siguiente a ser reemplazado
+	# Tener en cuenta los marcos que estan libres, identificables por su primera casilla que es negativa
+	# Regresara solo la hubicacion del marco en la memoria real
 
 def aMFU():
 	print >>sys.stderr, 'Funtcion MFU INCOMPLETA'
 	return 0;
+	# Buscara en la memoria real cual es el marco que es el siguiente a ser reemplazado
+	# Tener en cuenta los marcos que estan libres, identificables por su primera casilla que es negativa
+	# Regresara solo la hubicacion del marco en la memoria real 
 
 # Liberacion del proceso
 # Parametro: Numero de proceso a liberar
 def liberar(proceso):
 	print >>sys.stderr, 'Function liberar INCOMPLETA'
+	# Asumir que el proceso n existe, se puede checar en la matriz de procesos cuantos marcos tiene para saber cuando parar la busqueda
+	# Busca en la memoria real y swap todos los marcos que sean del proceso n
+	# el identificador estara en la primera casilla del renglon con el formato n.m (n=proceso, m=marco)
+	# saca el cociente con el floor y el residuo con %
+	# multiplica su primera casilla por -1, no es necesario borrar la informacion,
+	# siendo negativo lo convierte en un valor invalido y por lo tanto vacio
+	# Luego va a la matriz de procesos y pone el timestamp de salida del proceso
+	# Recordar actualizar el valor de la memoria disponible
 
 # Buscar Direccion disponible para remplazar
 # Return: Direccion de la memoria real
@@ -92,11 +132,26 @@ def buscar():
 # Parametro: Numero de proceso a accesar, direccion virtual, accion (escritura = 1, lectura = 0)
 def acceso(proceso,dirvir,accion):
 	print >>sys.stderr, 'Function acceso INCOMPLETA'
+	# Asumir que el proceso n existe, que la direccion virtual esta dentro del tamano del proceso y que la accion es valida
+	# En nuestro caso, la accion en realidad no nos interesa, asique se puede ignorar.
+	# Calcular el marco a buscar, convertirlo al identificador con el formato n.m (n=proceso, m=marco)
+	# buscar despues en la memoria real y swap el identificador, si se encuentra en el swap, usar la funcion buscar
+	# esta funcion regresara un numero de una posicion en la matriz de la memoria real que podra ser reemplazada por el marco que se necesita
+	# haces el intercambio de los dos marcos
+	# recuerda actualizar el renglon de Timestamp entrada (el tiempo en que el marco es cargado en la memoria real)
+	# no es necesario actualizar el timestamp o el contador si el marco va al swap
+	# en el caso de que el marco ya se encontraba en la memoria real, aumenta el contador
 
 # Proceso
 # Parametro: Numero del proceso, Tamano del proceso, Numero de marcos.
 def proceso(proceso,tamano,marcos):
 	print >>sys.stderr, 'Function proceso INCOMPLETA'
+	# Asumir que el proceso n no existe aun, que el tamano x cabe en la memoria y que su equivalente en marcos es m
+	# Busca en la memoria real y swap todos los marcos necesarios que esten vacios
+	# esto se puede saber con la primera casilla del renglon que sera negativa
+	# actualiza el timestamp de entrada y el contador, esto no es necesario si se carga en el swap
+	# Luego va a la matriz de procesos y actualiza los valores del renglon n (la timestamp de entrada, el tamano el byte y el numero de marcos)
+	# Recordar actualizar el valor de la memoria disponible
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -156,6 +211,8 @@ try:
 				if (PS_MIN > PageSize or PS_MAX < PageSize):
 					print >>sys.stderr, '* Error: Valor fuera de limite > PageSize'
 					salir()
+				# iniciar la memoria real y swap con tamano en marcos
+				iniciarMemoria(ceil(RealMemory*1024/PageSize),ceil(SwapMemory*1024/PageSize))
 			elif ('PoliticaMemory' in data):
 				# Las variables deben de ya haber sido inicializadas
 				if (RealMemory == -1 or SwapMemory == -1 or PageSize == -1):
