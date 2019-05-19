@@ -25,6 +25,7 @@ from math import ceil
 # acceso a datos
 # matr[reng,col]
 
+
 # Inicializacion
 
 # Variables en valores negativos
@@ -34,11 +35,9 @@ SwapMemory = -1
 PageSize = -1
 PoliticaMemory = 'XXX'
 # Memoria total disponible
-# unidades en marcos
 M_DIS = 0
 
 # Variables limites
-# Estos limites pueden ser cambiados
 RM_MAX = 10
 RM_MIN = 0
 SM_MAX = 10
@@ -50,30 +49,14 @@ PS_MIN = 0
 # [Timestamp entrada, Timestamp salida, # de Marcos totales, # de Tamano del proceso]
 Proc=np.full((10,4),-1)
 
-# Errores existentes
-mError = np.array(['* Error: Valor fuera de limite > RealMemory','* Error: Valor fuera de limite > SwapMemory','* Error: Valor fuera de limite > PageSize','* Error: Inicializacion incompleta','* Error: commando desconocido',' * Error: Politica incompleta','* Error: Proceso invalido > ','* Error: Memoria requerida','* Error: Proceso invalido >','* Error: Direccion virtual invalida >','* Error: Accion invalida >','* Error: Proceso invalido > ','* Error: Algoritmno invalido > PoliticaMemory'])
-
 # Funciones
-
-# Manejo de errores
-# Parametro: Numero identificador de error
-def manejodeErrores(error):
-	print >>sys.stderr, mError[error]
-
-	if(mError[error] > 6 and error != 13):
-		print >>sys.stderr, ' %s' % data
-
-	if(mError[error] == 13):
-		print >>sys.stderr, ' %s' % PoliticaMemory
-
-	connection.sendall('* Error: ' + mError[error])
-	salir()
 
 # Inicializar la memoria Swap y Real
 # Parametro: Tamano de la memoria real y Tamano de la memoria swap
 def iniciarMemoria():
 	# Variable Arreglo de RealMemory y SwapMemory
 	# [# identificador, Timestamp entrada a RM, Contador usos]
+	print "Memoria inicializada"
 	RM = np.full((int(ceil(RealMemory*1024/PageSize)),3),-1)
 	SM = np.full((int(ceil(SwapMemory*1024/PageSize)),3),-1)
 
@@ -96,7 +79,10 @@ def aMFU():
 # Liberacion del proceso
 # Parametro: Numero de proceso a liberar
 def liberar(proceso):
-	print >>sys.stderr, 'Function liberar INCOMPLETA'
+	print >>sys.stderr, 'Function liberar'
+	print Proc
+	Proc[proceso,0]*=-1
+	print Proc
 
 # Buscar Direccion disponible para remplazar
 # Return: Direccion de la memoria real
@@ -115,6 +101,14 @@ def acceso(proceso,dirvir,accion):
 # Parametro: Numero del proceso, Tamano del proceso, Numero de marcos.
 def proceso(proceso,tamano,marcos):
 	print >>sys.stderr, 'Function proceso INCOMPLETA'
+	# agregando proceso a la matriz de Proceso
+	# Timestamp entrada
+	Proc[proceso,0]=0.1
+	# Timestamp salida (que aun no es inicializada)
+	# # de Marcos totales
+	Proc[proceso,2]=marcos
+	# # de Tamano del proceso
+	Proc[proceso,3]=tamano
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -153,7 +147,8 @@ try:
 				# Comprobando variables
 				# RM_MIN < RealMemory < RM_MAX
 				if (RM_MIN > RealMemory or RM_MAX < RealMemory):
-					manejodeErrores(1)
+					print >>sys.stderr, '* Error: Valor fuera de limite > RealMemory'
+					salir()
 			elif ('SwapMemory' in data):
 				# Guardando variables
 				SwapMemory = int(data[11:])
@@ -161,7 +156,8 @@ try:
 				# Comprobando variables
 				# SM_MIN < SwapMemory < SM_MAX
 				if (SM_MIN > SwapMemory or SM_MAX < SwapMemory):
-					manejodeErrores(2)
+					print >>sys.stderr, '* Error: Valor fuera de limite > SwapMemory'
+					salir()
 			elif ('PageSize' in data):
 				# Guardando variables
 				PageSize = int(data[9:])
@@ -169,21 +165,27 @@ try:
 				# Comprobando variables
 				# PS_MIN < PageSize < PS_MAX
 				if (PS_MIN > PageSize or PS_MAX < PageSize):
-					manejodeErrores(3)
+					print >>sys.stderr, '* Error: Valor fuera de limite > PageSize'
+					salir()
 			elif ('PoliticaMemory' in data):
 				# Las variables deben de ya haber sido inicializadas
 				if (RealMemory == -1 or SwapMemory == -1 or PageSize == -1):
-					manejodeErrores(4)
+					print >>sys.stderr, '* Error: Inicializacion incompleta'
+					salir()
+				else:
+					iniciarMemoria()
 				# Guardando variables
 				PoliticaMemory = data[15:]
 				# Comprobando variables
 				# PoliticaMemory = LRU o MFU
 				if ('LRU' != PoliticaMemory and 'MFU' != PoliticaMemory):
-					manejodeErrores(13)
+					print >>sys.stderr, '* Error: Algoritmno invalido > PoliticaMemory "%s"' % PoliticaMemory
+					salir()
 			elif (data[0] == 'P'):
 				# PoliticaMemory ya debio de haber sido especificado
 				if (PoliticaMemory == 'XXX'):
-					manejodeErrores(6)
+					print >>sys.stderr, '* Error: Politica incompleta'
+					salir()
 				# Crear proceso #Pnum con tamano #Pbyte
 				# Buscando espacios
 				esp = data.find(' ')
@@ -196,11 +198,14 @@ try:
 				# Proc en la posicion Pnum debe de tener un numero invalido (menor a 0)
 				# Pbyte debe de ser menor o igual al espacio disponible
 				if (Proc[Pnum][0] > 0 or Pnum < 0):
-					manejodeErrores(7)
+					print >>sys.stderr, '* Error: Proceso invalido > %s' % data
+					#salir()
 				elif (Pmar > M_DIS or Pmar < 0):
-					manejodeErrores(8)
+					print >>sys.stderr, '* Error: Memoria requerida > %s' % data
+					#salir()
 				else:
 					# Mandando Pbyte, Pmar y Pnum a la funcion proceso
+					iniciarMemoria()
 					proceso(Pnum,Pbyte,Pmar)
 			elif (data[0] == 'A'):
 				# Acceder a proceso #Anum con direccion virtual #Adv para #Acc (leer/escribir)
@@ -217,11 +222,14 @@ try:
 				# Adv debe de ser menor al tamano del proceso
 				# Acc tiene que ser 0 o 1
 				if (Proc[Anum][0] < 0 or Anum < 0):
-					manejodeErrores(9)
+					print >>sys.stderr, '* Error: Proceso invalido > %s' % data
+					#salir()
 				elif (Adv > Proc[Anum][3] or Adv < 0):
-					manejodeErrores(10)
+					print >>sys.stderr, '* Error: Direccion virtual invalida > %s' % data
+					#salir()
 				elif (Acc > 1 or Acc < 0):
-					manejodeErrores(11)
+					print >>sys.stderr, '* Error: Accion invalida > %s' % data
+					#salir()
 				else:
 					# Mandando Adv, Anum, Acc a la funcion acceso
 					acceso(Anum,Adv,Acc)
@@ -232,7 +240,8 @@ try:
 				# Comprobando variables
 				# Proc en la posicion Lnum debe de tener un numero valido (mayor a 0)
 				if (Proc[Lnum][0] < 0 or Lnum < 0):
-					manejodeErrores(12)
+					print >>sys.stderr, '* Error: Proceso invalido > %s' % data
+					#salir()
 				# Manda Lnum a la funcion liberar
 				liberar(Lnum)
 			elif (data[0] == 'C'):
@@ -240,7 +249,8 @@ try:
 				print >> sys.stderr, data[2:]
 			else:
 				# Si no es ninguno commando de los anteriores, es error.
-				manejodeErrores(5)
+				print >>sys.stderr, '* Error: commando desconocido'
+				salir()
 			connection.sendall(' ' + data)
 		else:
 			print >>sys.stderr, 'No data from', client_address
