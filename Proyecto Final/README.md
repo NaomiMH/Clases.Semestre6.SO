@@ -63,3 +63,25 @@ A la hora de recibir el commando F, para terminar el programa, se tiene que veri
 Creacion de memoria
 
 Se inicializa la memoria real y la memoria swap segun su tamano correspondiente en marcos
+
+
+# Version 2.1
+
+Comentarios
+utilizando funcion inicializacion
+
+# Version 2.2
+
+Corregido la funcion inicializacion
+
+# Version 3
+
+Errores
+
+# Version 3.1
+
+Funciones proceso, acceso, estrategias de reemplazo y liberacion. Se agrega historial.
+
+# Version 3.2
+
+Lo que hizo mario
