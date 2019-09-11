@@ -59,29 +59,34 @@ Problema a resolver:
 Cuando sale del servidor por un error de las variables recibidas, el cliente no se cierra correctamente.
 A la hora de recibir el commando F, para terminar el programa, se tiene que verificar que todos los procesos hayan sido liberados correctamente.
 
-## Version 2
+## Version 2 - 3.2
 Creacion de memoria
 
-Se inicializa la memoria real y la memoria swap segun su tamano correspondiente en marcos
+Creacion de funcion de inicializacion
 
+Corrigiendo funcion de inicializacion
 
-# Version 2.1
+Corrigiendo Errores
 
-Comentarios
-utilizando funcion inicializacion
+Creacion de funciones: proceso, acceso, estrategias de reemplazo y liberacion. Creacion de tabla de historial.
 
-# Version 2.2
+Creacion de la tabla de fallas.
 
-Corregido la funcion inicializacion
+Se inicializa la memoria real y la memoria swap segun su tamano correspondiente en marcos.
+Se crea y corrige una funcion para inicializar la memoria real y swap con los tamanos que sean indicados entre los comandos de entrada.
+Se corrigen errores de procesamiento.
+Se crean funciones como:
+Proceso, donde un proceso llega a la memoria y es asignado en algun lugar libre en la memoria.
+Acceso, llega una peticion de acceder a un proceso n con un desplazamiento x. Dicho desplazamiento es correspondiente a uno de los marcos del proceso, dicho marco puede encontrarse en la memoria real o swap, en el caso de encontrarse en la memoria swap, este marco sera movido a la momria real, de no encontrar espacio, con la estrategia de reemplazo, se le asigna un lugar.
+Estrategia de reemplazo, definido entre los comandos de entrada, regresa un marco en la memoria real que puede estar libre o ocupado por otro marco. Dicho marco es elegido por la estrategia de reemplazo.
+Liberacion, un proceso n es borrado de la memoria real y swap.
+Creacion de la tabla de historial, contiene informacion sobre el comando que llega y el resultado en la memoria swap y real, asi como un listado de los procesos que fueron liberados.
+Creacion de la tabla de fallas, contiene un contador de la cantidad de fallas en memoria. Cuando un marco de un proceso no se encuentra en memoria real.
 
-# Version 3
+Nota: se perdieron los detalles de cada cambio de version al acercarse la fecha de entrega, a causa de que los cambios comenzaron a ser mas pequenos y en fechas muy cercanas.
 
-Errores
+## Entrega del proyecto
+Retroalimentacion
 
-# Version 3.1
-
-Funciones proceso, acceso, estrategias de reemplazo y liberacion. Se agrega historial.
-
-# Version 3.2
-
-Lo que hizo mario
+Cuando un proceso llega primero es guardado en la memoria real, sin importar si esta esta llena, si no tiene espacio se liberan los marcos necesarios atraves de la estrategia de reemplazo correspondiente.
+En la tabla de fallas, solo se tiene que contar cuando llega una peticion de acceso y el marco del proceso al que se quiere acceder no se encuentra en la memoria real.
